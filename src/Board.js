@@ -160,7 +160,7 @@
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
       let sum = 0;
       for (var row = 0; row < this.rows().length - 1; row++) {
-        for (var slot = 0; row + slot < this.rows().length && minorDiagonalColumnIndexAtFirstRow - slot  >= 0; slot++) {
+        for (var slot = 0; row + slot < this.rows().length && minorDiagonalColumnIndexAtFirstRow >= slot; slot++) {
           sum += this.rows()[row + slot][minorDiagonalColumnIndexAtFirstRow - slot];       
         }
       } if (sum > 1) {
