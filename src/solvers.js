@@ -17,15 +17,35 @@
 
 window.findNRooksSolution = function(n) {
   var solution = undefined; //fixme
-
+  var Tree = function (row, col) {
+    this.pos = [row, col];
+    this.children = [];
+  };
+  var solutionTree = new Tree(-1, x);
+  var rookTree = function(tree, dnc) {
+    for (var i = 0; i < n; i++) {
+      if (dnc.indexOf(i) !== -1) {
+        dnc.push(i);
+        this.children.push(new Tree(this.row++, i));
+        rookTree(this.children[i], dnc);
+      } else {
+        this.children.push('batman');
+      }
+    }
+  };
+  
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
-
+  var solutionCount = 0; //fixme
+      
+    if (this.children[i] === undefined) {
+      solutionCount++;
+    }
+  
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };
