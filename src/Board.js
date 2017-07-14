@@ -161,13 +161,11 @@
       for (var i = 0; i < max; i++) {
         if (minorDiagonalColumnIndexAtFirstRow < this.rows().length) { 
           sum += this.rows()[i][max - 1 - i];
-          console.log(`[${i}, ${max - 1 - i }]`);
         } else {
           sum += this.rows()[i + this.rows().length - max][this.rows().length - 1 - i];
         }
         
       } 
-      console.log('/n');
       sum > 1 ? conflict = true : conflict = false; 
       return conflict; // fixme
     },

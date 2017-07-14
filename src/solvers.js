@@ -16,23 +16,15 @@
 
 
 window.findNRooksSolution = function(n) {
-  var solution = undefined; //fixme
-  var Tree = function (row, col) {
-    this.pos = [row, col];
-    this.children = [];
-  };
-  var solutionTree = new Tree(-1, x);
-  var rookTree = function(tree, dnc) {
-    for (var i = 0; i < n; i++) {
-      if (dnc.indexOf(i) !== -1) {
-        dnc.push(i);
-        this.children.push(new Tree(this.row++, i));
-        rookTree(this.children[i], dnc);
-      } else {
-        this.children.push('batman');
-      }
-    }
-  };
+  var solution = [];
+  var emptyRow = new Array(n);
+  emptyRow.fill(0);
+  for (var i = 0; i < n; i++) {
+    solution.push(emptyRow.slice(0));
+  }
+  for (var i = 0; i < n; i++) {
+    solution[i][i] = 1;
+  }
   
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
@@ -40,12 +32,31 @@ window.findNRooksSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = 0; //fixme
-      
-    if (this.children[i] === undefined) {
+  var solutionCount = 0; //fixme fixme
+  var Tree = function (row, col) {
+    this.pos = [row, col];
+    this.children = [];
+  };
+  var solutionTree = new Tree(-1, 'x');
+  var rookTree = function(tree, dnc) {
+   // console.log('weve called this function this many times');
+    console.log(tree);
+    for (var i = 0; i < n; i++) {
+      var nDnc = dnc.slice(0);
+      nDnc.push(i);
+      if (dnc.indexOf(i) === -1) {
+        var newRow = tree.pos[0] + 1;
+        tree.children.push(new Tree(newRow, i));
+        rookTree(tree.children[tree.children.length - 1], nDnc);
+      } else {
+        tree.children.push('batman');
+      } 
+    } if (tree.pos[0] === n - 1) {
+      console.log('youngest child');
       solutionCount++;
     }
-  
+  };
+  rookTree(solutionTree, []);
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };
